@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.portlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 
@@ -18,14 +19,14 @@ import javax.validation.Valid;
  * Created by Mayank on 9/12/2015.
  */
 @Controller
-@RequestMapping(value="/client")
+@RequestMapping(value="/client/register.form")
 public class ClientController {
     @Autowired
     private ClientRegistrationService clientRegistrationService;
     private static final String REGISTRATION_FORM_VIEW = "registration"; //todo add address
 
-    @RequestMapping(value = "/register", method= RequestMethod.POST)
-    public ModelAndView registerClient(@Valid @ModelAttribute("client") Client client, BindingResult result){
+    @RequestMapping( method= RequestMethod.POST)
+    public ModelAndView onSubmit(ModelMap map,@Valid @ModelAttribute("client") Client client, BindingResult result){
         if(result.hasErrors())
             return new ModelAndView(REGISTRATION_FORM_VIEW);
         if(client ==null)
@@ -35,6 +36,10 @@ public class ClientController {
         return new ModelAndView(REGISTRATION_FORM_VIEW);
     }
 
+    @RequestMapping( method= RequestMethod.GET)
+    public String onInit(ModelMap map){
+        return REGISTRATION_FORM_VIEW;
+    }
     @ModelAttribute("client")
     public Client getNewClient(){
         return new Client();

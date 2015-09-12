@@ -12,14 +12,18 @@
     <title>Client Registration</title>
 </head>
 <body>
-<spring:form method="post" action="/client/register">
-    <table draggable="true">
+<spring:form modelAttribute="client" method="post" action="/client/register.form">
+    <table >
         <tr>
             <td>Name</td>
-            <td><spring:input path="@{client.name}" /></td>
+            <td><spring:input path="${client.name}" /></td>
+        </tr>
+        <tr>
+            <spring:errors path="${client.name}"/>
         </tr>
 
     </table>
+    <input type="submit">
 </spring:form>
 </body>
 </html>

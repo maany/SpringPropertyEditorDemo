@@ -18,12 +18,13 @@ import javax.validation.Valid;
  * Created by Mayank on 9/12/2015.
  */
 @Controller
+@RequestMapping(value="/client")
 public class ClientController {
     @Autowired
     private ClientRegistrationService clientRegistrationService;
-    private static final String REGISTRATION_FORM_VIEW = ""; //todo add address
+    private static final String REGISTRATION_FORM_VIEW = "registration"; //todo add address
 
-    @RequestMapping(value = "/client", method= RequestMethod.POST)
+    @RequestMapping(value = "/register", method= RequestMethod.POST)
     public ModelAndView registerClient(@Valid @ModelAttribute("client") Client client, BindingResult result){
         if(result.hasErrors())
             return new ModelAndView(REGISTRATION_FORM_VIEW);

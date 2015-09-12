@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: Mayank
@@ -8,9 +9,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>Client Registration</title>
 </head>
 <body>
+<spring:form method="post" action="/client/register">
+    <table draggable="true">
+        <tr>
+            <td>Name</td>
+            <td><spring:input path="@{client.name}" /></td>
+        </tr>
 
+    </table>
+</spring:form>
 </body>
 </html>

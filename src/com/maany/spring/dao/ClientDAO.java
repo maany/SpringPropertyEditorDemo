@@ -11,12 +11,14 @@ import java.util.List;
 @Repository
 public class ClientDAO {
     private List<Client> clients;
-
+    private static int counter = 0;
     /**
      * add new clients
      * @param client
      */
     public void addClient(Client client){
+        client.setId(counter);
+        counter++;
         clients.add(client);
     }
 

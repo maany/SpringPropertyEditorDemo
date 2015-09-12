@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ClientRegistrationService {
+
     @Autowired
     private ClientDAO clientDAO;
 
     public void registerNewClient(Client client){
+
         clientDAO.addClient(client);
     }
 

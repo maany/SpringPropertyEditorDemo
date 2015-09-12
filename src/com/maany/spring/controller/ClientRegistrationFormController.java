@@ -11,14 +11,5 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class ClientRegistrationFormController {
 
-    @Autowired
-    private ClientDAO clientDAO;
 
-    public void registerNewClient(Client client){
-        clientDAO.addClient(client);
-    }
-
-    public Client getClient(int id){
-        return clientDAO.getClient(id);
-    }
 }

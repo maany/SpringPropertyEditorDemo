@@ -31,4 +31,15 @@ public class Address {
     public void setThirdLine(String thirdLine) {
         this.thirdLine = thirdLine;
     }
+
+    @Override
+    public String toString() {
+   /*     return "Address{" +
+                "firstLine='" + firstLine + '\'' +
+                ", secondLine='" + secondLine + '\'' +
+                ", thirdLine='" + thirdLine + '\'' +
+                '}';
+    }*/
+        return firstLine + "--" + secondLine + "--" + thirdLine;
+    }
 }

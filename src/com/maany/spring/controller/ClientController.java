@@ -32,7 +32,9 @@ public class ClientController {
             throw new RuntimeException("Client was null");
 
         clientRegistrationService.registerNewClient(client);
-        return new ModelAndView(ClientController.REGISTRATION_FORM_VIEW);
+        map.put("message","Client successfully registered : " + client.getName() + " id: " + client.getId());
+        ModelAndView modelAndView = new ModelAndView(REGISTRATION_FORM_VIEW,"model",map);
+        return modelAndView;
     }
 
     @RequestMapping( method= RequestMethod.GET)

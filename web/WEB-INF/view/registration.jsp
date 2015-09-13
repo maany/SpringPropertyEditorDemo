@@ -28,7 +28,7 @@
         </tr>
         <tr>
             <td>Address</td>
-            <td><spring:input path="${client.addressCollection.}"</td>
+            <td><spring:input path="${client.addressCollection}"</td>
         </tr>
     </table>
     <input type="submit">

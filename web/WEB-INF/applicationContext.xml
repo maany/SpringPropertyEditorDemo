@@ -4,6 +4,20 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-
+<bean id="address1" class="com.maany.spring.model.Address">
+       <property name="firstLine" value="IA/ 49 C"/>
+       <property name="secondLine" value="Ashok Vihar Phase-1"/>
+       <property name="thirdLine" value="Delhi-110052"/>
+</bean>
+<bean id="address2" class="com.maany.spring.model.Address">
+       <property name="firstLine" value="517 W Apt 12"/>
+       <property name="secondLine" value="144 Street"/>
+       <property name="thirdLine" value="NYC -10007"/>
+</bean>
+<bean id="address3" class="com.maany.spring.model.Address">
+       <property name="firstLine" value="NIT Delhi"/>
+       <property name="secondLine" value="Narela"/>
+       <property name="thirdLine" value="Delhi"/>
+</bean>
 
 </beans>

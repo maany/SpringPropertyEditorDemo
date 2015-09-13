@@ -12,7 +12,7 @@
     <title>Client Registration</title>
 </head>
 <body>
-<spring:form modelAttribute="client" method="post" action="/client/register.form">
+<spring:form modelAttribute="client" method="post" >
     <table >
         <tr>
             <td>Name</td>

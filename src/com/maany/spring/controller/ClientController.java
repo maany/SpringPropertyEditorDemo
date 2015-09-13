@@ -10,7 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.portlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
@@ -23,8 +23,7 @@ import javax.validation.Valid;
 public class ClientController {
     @Autowired
     private ClientRegistrationService clientRegistrationService;
-    private static final String REGISTRATION_FORM_VIEW = "registration"; //todo add address
-
+    public static final String REGISTRATION_FORM_VIEW = "registration";
     @RequestMapping( method= RequestMethod.POST)
     public ModelAndView onSubmit(ModelMap map,@Valid @ModelAttribute("client") Client client, BindingResult result){
         if(result.hasErrors())
@@ -33,7 +32,7 @@ public class ClientController {
             throw new RuntimeException("Client was null");
 
         clientRegistrationService.registerNewClient(client);
-        return new ModelAndView(REGISTRATION_FORM_VIEW);
+        return new ModelAndView(ClientController.REGISTRATION_FORM_VIEW);
     }
 
     @RequestMapping( method= RequestMethod.GET)

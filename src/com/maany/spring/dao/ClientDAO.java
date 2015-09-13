@@ -3,6 +3,7 @@ package com.maany.spring.dao;
 import com.maany.spring.model.Client;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  */
 @Repository
 public class ClientDAO {
-    private List<Client> clients;
+    private List<Client> clients = new ArrayList<Client>();
     private static int counter = 0;
     /**
      * add new clients

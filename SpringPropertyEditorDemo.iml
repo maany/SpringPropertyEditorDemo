@@ -25,5 +25,6 @@
     <orderEntry type="library" name="Spring-4.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Spring MVC-4.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="org.hibernate:hibernate-validator-annotation-processor:4.2.0.Final" level="project" />
+    <orderEntry type="library" name="org.springframework:springloaded:1.2.4.RELEASE" level="project" />
   </component>
 </module>

@@ -1,6 +1,5 @@
-package com.maany.spring.test;
-
 import com.maany.spring.model.Address;
+import com.maany.spring.model.AddressCollection;
 import com.maany.spring.propertyeditor.CollectionPropertyEditor;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,12 +15,12 @@ import static org.junit.Assert.*;
  * Created by Mayank on 9/13/2015.
  */
 public class CollectionPropertyEditorTest {
-    CollectionPropertyEditor<Address> collectionPropertyEditor;
-    Collection<Address> collection ;
+    CollectionPropertyEditor collectionPropertyEditor;
+    AddressCollection collection ;
     @Before
     public void initTest(){
-        collectionPropertyEditor = new CollectionPropertyEditor<>(Address.class);
-        collection = new ArrayList<>();
+        collectionPropertyEditor = new CollectionPropertyEditor(Address.class);
+        collection = new AddressCollection();
         Address address1 = new Address();
         address1.setFirstLine("IA 49 C Ashok Vihar");
         address1.setSecondLine("Phase 1");

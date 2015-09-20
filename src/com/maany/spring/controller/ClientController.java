@@ -2,6 +2,7 @@ package com.maany.spring.controller;
 
 import com.maany.spring.dao.ClientDAO;
 import com.maany.spring.model.Address;
+import com.maany.spring.model.AddressCollection;
 import com.maany.spring.model.Client;
 import com.maany.spring.propertyeditor.CollectionPropertyEditor;
 import com.maany.spring.service.ClientRegistrationService;
@@ -56,8 +57,8 @@ public class ClientController {
 
     @InitBinder
     public void setBinders(WebDataBinder binder){
-        CollectionPropertyEditor collectionPropertyEditor = new CollectionPropertyEditor<Address>(Address.class);
-        binder.registerCustomEditor(Collection.class,collectionPropertyEditor);
+        CollectionPropertyEditor collectionPropertyEditor = new CollectionPropertyEditor(Address.class);
+        binder.registerCustomEditor(AddressCollection.class,collectionPropertyEditor);
 
     }
 }

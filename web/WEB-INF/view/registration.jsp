@@ -15,9 +15,9 @@
     <script src ="/resources/scripts/formRequestHandler.js" ></script>
     <script>
         function formProcessor(form){
-            var csv = getCSV('address');
+            var csv = getCSV('addressCollection');
             alert(csv);
-            var checkBoxArray = document.getElementsByName('address');
+            var checkBoxArray = document.getElementsByName('addressCollection');
             for(var i=0;i<checkBoxArray.length;i++) {
                 var checkBox = checkBoxArray[i];
                 document.getElementById(checkBox.id);
@@ -25,7 +25,7 @@
             }
             var addressNode = document.createElement("input");
             addressNode.setAttribute('type','hidden');
-            addressNode.setAttribute('name','address');
+            addressNode.setAttribute('name','addressCollection');
             addressNode.setAttribute('value',csv);
             form.appendChild(addressNode);
         }
@@ -53,21 +53,21 @@
     <table>
         <tr>
             <td>Name</td>
-            <td><spring:input path="${client.name}"/></td>
+            <td><spring:input path="name" name="name"/></td>
         </tr>
         <tr>
-            <spring:errors path="${client.name}"/>
+            <spring:errors path="name"/>
         </tr>
         <tr>
-            <td><spring:checkbox name="address" path="${client.addressCollection}" value="IA 49 C--Ashok Vihar Phase-1--Delhi-110052"/>Address 1</td>
-        </tr>
-
-        <tr>
-            <td><spring:checkbox name="address" path="${client.addressCollection}" value="517 W Apt 12--144 Street--New York"/>Address 2</td>
+            <td><spring:checkbox path="addressCollection" value="IA 49 C--Ashok Vihar Phase-1--Delhi-110052"/>Address 1</td>
         </tr>
 
         <tr>
-            <td><spring:checkbox name="address" path="${client.addressCollection}" value="NIT Delhi--Narela--Delhi"/>Address 3</td>
+            <td><spring:checkbox path="addressCollection" value="517 W Apt 12--144 Street--New York"/>Address 2</td>
+        </tr>
+
+        <tr>
+            <td><spring:checkbox path="addressCollection" value="NIT Delhi--Narela--Delhi"/>Address 3</td>
         </tr>
 
     </table>

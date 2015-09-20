@@ -1,6 +1,7 @@
 package com.maany.spring.propertyeditor;
 
 import com.maany.spring.model.Address;
+import com.maany.spring.model.AddressCollection;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
@@ -11,7 +12,7 @@ import java.util.Collection;
 /**
  * Created by Mayank on 9/13/2015.
  */
-public class CollectionPropertyEditor<T extends Address>  extends PropertyEditorSupport {
+public class CollectionPropertyEditor extends PropertyEditorSupport {
     private Class classType;
 
     public CollectionPropertyEditor(Class classType) {
@@ -27,11 +28,12 @@ public class CollectionPropertyEditor<T extends Address>  extends PropertyEditor
     public String getAsText() {
         String returnValue = "";
         try {
-            Collection<T> collection = (Collection<T>)getValue();
-            for(T element : collection){
+            AddressCollection collection = (AddressCollection)getValue();
+            for(Address element : collection){
                 returnValue+= element.toString() + ", ";
             }
         }catch (Exception ex){
+            ex.printStackTrace();
             System.out.println("FAILED to getAsText() object of type " + classType.getName());
         }
         return returnValue;
@@ -45,7 +47,7 @@ public class CollectionPropertyEditor<T extends Address>  extends PropertyEditor
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
         String[] values = text.split(", ");
-        Collection<Address> collection = new ArrayList<Address>();
+        AddressCollection collection = new AddressCollection();
         for(String value:values){
             if(value.length()<=1)
                 continue;

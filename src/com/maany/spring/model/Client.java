@@ -11,7 +11,7 @@ import java.util.Collection;
 public class Client {
     private int id;
     private String name;
-    private Collection<Address> addressCollection;
+    private AddressCollection addressCollection;
 
     public int getId() {
         return id;
@@ -29,11 +29,11 @@ public class Client {
         this.name = name;
     }
 
-    public Collection<Address> getAddressCollection() {
+    public AddressCollection getAddressCollection() {
         return addressCollection;
     }
 
-    public void setAddressCollection(Collection<Address> addressCollection) {
+    public void setAddressCollection(AddressCollection addressCollection) {
         this.addressCollection = addressCollection;
     }
 }

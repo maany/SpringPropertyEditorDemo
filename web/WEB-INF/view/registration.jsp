@@ -14,17 +14,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src ="/resources/scripts/formRequestHandler.js" ></script>
     <script>
-        $(function(){
-            $('#submit-button').click(function(){
-                window.console.log('sending out request');
-                window.console.log($('#client').children.length);
-                window.alert('sending out request');
-                var form = document.getElementsByName('form');
-                for(var i=0;i<form.length;i++){
-                    window.console.log(form.item(i).nodeName);
+        function formProcessor(form){
+            var csv = getCSV('address');
+            alert(csv);
+            var checkBoxArray = document.getElementsByName('address');
+            for(var i=0;i<checkBoxArray.length;i++) {
+                var checkBox = checkBoxArray[i];
+                document.getElementById(checkBox.id);
+                checkBox.checked = false;
+            }
+            var addressNode = document.createElement("input");
+            addressNode.setAttribute('type','hidden');
+            addressNode.setAttribute('name','address');
+            addressNode.setAttribute('value',csv);
+            form.appendChild(addressNode);
+        }
+        function getCSV(checkboxName){
+            var csv = "";
+            var checkboxArray = document.getElementsByName(checkboxName);
+            for(var i=0;i<checkboxArray.length;i++){
+                if(checkboxArray[i].checked){
+                    //alert(checkboxArray[i].value);
+                    csv = csv + checkboxArray[i].value + ", ";
                 }
-            });
-        });
+            }
+            return csv;
+        }
     </script>
  </head>
 
@@ -56,7 +71,7 @@
         </tr>
 
     </table>
-    <input id="submit-button" type="submit">
+    <input id="submit-button" onclick="formProcessor(this)" type="submit">
 </spring:form>
 </body>
 </html>

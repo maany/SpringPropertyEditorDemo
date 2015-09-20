@@ -1,6 +1,8 @@
 package com.maany.spring.propertyeditor;
 
 import com.maany.spring.model.Address;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
 import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
@@ -57,4 +59,6 @@ public class CollectionPropertyEditor<T extends Address>  extends PropertyEditor
         }
         setValue(collection);
     }
+
+
 }

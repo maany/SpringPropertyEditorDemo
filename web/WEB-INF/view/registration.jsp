@@ -11,12 +11,29 @@
 <html>
 <head>
     <title>Client Registration</title>
-</head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src ="/resources/scripts/formRequestHandler.js" ></script>
+    <script>
+        $(function(){
+            $('#submit-button').click(function(){
+                window.console.log('sending out request');
+                window.console.log($('#client').children.length);
+                window.alert('sending out request');
+                var form = document.getElementsByName('form');
+                for(var i=0;i<form.length;i++){
+                    window.console.log(form.item(i).nodeName);
+                }
+            });
+        });
+    </script>
+ </head>
+
 <body>
 <c:set var="message" value="${model.message}"/>
 <c:if test="${not empty message}">
     <c:out value="${message}"/>
 </c:if>
+
 <spring:form modelAttribute="client" method="post">
     <table>
         <tr>
@@ -27,11 +44,19 @@
             <spring:errors path="${client.name}"/>
         </tr>
         <tr>
-            <td>Address</td>
-            <td><spring:input path="${client.addressCollection}"</td>
+            <td><spring:checkbox name="address" path="${client.addressCollection}" value="IA 49 C--Ashok Vihar Phase-1--Delhi-110052"/>Address 1</td>
         </tr>
+
+        <tr>
+            <td><spring:checkbox name="address" path="${client.addressCollection}" value="517 W Apt 12--144 Street--New York"/>Address 2</td>
+        </tr>
+
+        <tr>
+            <td><spring:checkbox name="address" path="${client.addressCollection}" value="NIT Delhi--Narela--Delhi"/>Address 3</td>
+        </tr>
+
     </table>
-    <input type="submit">
+    <input id="submit-button" type="submit">
 </spring:form>
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * Created by Mayank on 9/13/2015.
@@ -47,19 +48,25 @@ public class CollectionPropertyEditor extends PropertyEditorSupport {
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
         String[] values = text.split(", ");
-        AddressCollection collection = new AddressCollection();
-        for(String value:values){
-            if(value.length()<=1)
-                continue;
-            value.trim();
-            String[] addressLine= value.split("--");
-            Address address = new Address();
-            address.setFirstLine(addressLine[0]);
-            address.setSecondLine(addressLine[1]);
-            address.setThirdLine(addressLine[2]);
-            collection.add(address);
+        if(classType == Address.class) {
+            AddressCollection collection = new AddressCollection();
+            for (String value : values) {
+                if (value.length() <= 1)
+                    continue;
+                value.trim();
+                String[] addressLine = value.split("--");
+                Address address = new Address();
+                address.setFirstLine(addressLine[0]);
+                address.setSecondLine(addressLine[1]);
+                address.setThirdLine(addressLine[2]);
+                collection.add(address);
+            }
+            setValue(collection);
+        } else {
+            Collection collection = new HashSet();
+            // create collection of classType and modify frontend
+
         }
-        setValue(collection);
     }
 
 

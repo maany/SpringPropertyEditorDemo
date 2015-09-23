@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * Created by Mayank on 9/12/2015.
@@ -11,7 +12,15 @@ import java.util.Collection;
 public class Client {
     private int id;
     private String name;
+
+
     private AddressCollection addressCollection;
+    private Collection<GrantType> authorizedGrantTypes;
+
+    public Client() {
+        addressCollection = new AddressCollection();
+        authorizedGrantTypes = new HashSet<>();
+    }
 
     public int getId() {
         return id;
@@ -35,5 +44,13 @@ public class Client {
 
     public void setAddressCollection(AddressCollection addressCollection) {
         this.addressCollection = addressCollection;
+    }
+
+    public Collection<GrantType> getAuthorizedGrantTypes() {
+        return authorizedGrantTypes;
+    }
+
+    public void setAuthorizedGrantTypes(Collection<GrantType> authorizedGrantTypes) {
+        this.authorizedGrantTypes = authorizedGrantTypes;
     }
 }

@@ -1,25 +1,25 @@
 import com.maany.spring.model.Address;
 import com.maany.spring.model.AddressCollection;
+import com.maany.spring.model.GrantType;
 import com.maany.spring.propertyeditor.CollectionPropertyEditor;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.validation.constraints.AssertTrue;
-import java.util.ArrayList;
 import java.util.Collection;
-
-import static org.junit.Assert.*;
+import java.util.HashSet;
 
 /**
  * Created by Mayank on 9/13/2015.
  */
 public class CollectionPropertyEditorTest {
-    CollectionPropertyEditor collectionPropertyEditor;
+    CollectionPropertyEditor addressCollectionPropertyEditor;
+    CollectionPropertyEditor genericCollectionPropertyEditor;
     AddressCollection collection ;
+    Collection<GrantType> grantTypeCollection;
     @Before
     public void initTest(){
-        collectionPropertyEditor = new CollectionPropertyEditor(Address.class);
+        addressCollectionPropertyEditor = new CollectionPropertyEditor(Address.class);
         collection = new AddressCollection();
         Address address1 = new Address();
         address1.setFirstLine("IA 49 C Ashok Vihar");
@@ -39,6 +39,18 @@ public class CollectionPropertyEditorTest {
         collection.add(address1);
         collection.add(address2);
         collection.add(address3);
+
+        /*Grant Type Initialization*/
+        GrantType authorizationCode = new GrantType("authorization_code");
+        GrantType implicit = new GrantType("implicit");
+        GrantType password = new GrantType("password");
+        GrantType clientCredentials = new GrantType("client_credentials");
+
+        grantTypeCollection = new HashSet<>();
+        grantTypeCollection.add(authorizationCode);
+        grantTypeCollection.add(implicit);
+        grantTypeCollection.add(password);
+        grantTypeCollection.add(clientCredentials);
     }
 
     /**
@@ -47,17 +59,24 @@ public class CollectionPropertyEditorTest {
      */
     @Test
     public void testGetAsText() throws Exception {
-        collectionPropertyEditor.setValue(collection);
-        String csv = collectionPropertyEditor.getAsText();
+        addressCollectionPropertyEditor.setValue(collection);
+        String csv = addressCollectionPropertyEditor.getAsText();
         System.out.println(csv);
         Assert.assertTrue("see console output",true);
     }
 
     @Test
     public void testSetAsText() throws Exception {
-        collectionPropertyEditor.setValue(collection);
-        String csv = collectionPropertyEditor.getAsText();
-        collectionPropertyEditor.setAsText(csv);
-        Assert.assertEquals("Comparing both csv\'s" ,csv,collectionPropertyEditor.getAsText() );
+        addressCollectionPropertyEditor.setValue(collection);
+        String csv = addressCollectionPropertyEditor.getAsText();
+        addressCollectionPropertyEditor.setAsText(csv);
+        Assert.assertEquals("Comparing both csv\'s", csv, addressCollectionPropertyEditor.getAsText());
+    }
+    @Test
+    public void testGenericCollectionGeneration(){
+        genericCollectionPropertyEditor = new CollectionPropertyEditor(GrantType.class);
+        genericCollectionPropertyEditor.setAsText("authorization_code, implicit, password, client_credentials");
+        System.out.println(genericCollectionPropertyEditor.getValue());
+
     }
 }

@@ -69,6 +69,18 @@
         <tr>
             <td><spring:checkbox path="addressCollection" value="NIT Delhi--Narela--Delhi"/>Address 3</td>
         </tr>
+        GrantTypes <br>
+        <tr>
+            <td><spring:checkbox path="authorizedGrantTypes" value="authorization_code"/>Authorization Code3</td>
+        </tr>
+        <tr>
+            <td><spring:checkbox path="authorizedGrantTypes" value="implicit"/>Implicit</td>
+        </tr>        <tr>
+            <td><spring:checkbox path="authorizedGrantTypes" value="password"/>Resource Owner Password Credentials3</td>
+        </tr>
+        <tr>
+            <td><spring:checkbox path="authorizedGrantTypes" value="client_credentials"/>Client Credentials</td>
+        </tr>
 
     </table>
     <input id="submit-button" onclick="formProcessor(this)" type="submit">

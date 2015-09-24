@@ -2,6 +2,7 @@ package com.maany.spring.propertyeditor;
 
 import com.maany.spring.model.Address;
 import com.maany.spring.model.AddressCollection;
+import com.maany.spring.model.Parametrized;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
@@ -13,7 +14,7 @@ import java.util.HashSet;
 /**
  * Created by Mayank on 9/13/2015.
  */
-public class CollectionPropertyEditor extends PropertyEditorSupport {
+public class  CollectionPropertyEditor extends PropertyEditorSupport {
     private Class classType;
 
     public CollectionPropertyEditor(Class classType) {
@@ -63,10 +64,26 @@ public class CollectionPropertyEditor extends PropertyEditorSupport {
             }
             setValue(collection);
         } else {
-            Collection collection = new HashSet();
             // create collection of classType and modify frontend
-
+            setValue(createCollection(values));
         }
+    }
+
+    public <T extends Parametrized> Collection<T> createCollection(String[] values) {
+        Collection<T> collection = new HashSet<>();
+        for(String value : values) {
+            T instance = null;
+            try {
+                instance = (T) classType.newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            instance.setParameter(value);
+            collection.add(instance);
+        }
+        return collection;
     }
 
 

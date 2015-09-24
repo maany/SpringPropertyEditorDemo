@@ -5,6 +5,14 @@ package com.maany.spring.model;
  */
 public class GrantType implements Parametrized {
     String grantType;
+
+    public GrantType() {
+    }
+
+    public GrantType(String grantType) {
+        this.grantType = grantType;
+    }
+
     @Override
     public String getParameter() {
         return grantType;
@@ -13,5 +21,10 @@ public class GrantType implements Parametrized {
     @Override
     public void setParameter(String parameter) {
         grantType = parameter;
+    }
+
+    @Override
+    public String toString() {
+        return grantType;
     }
 }

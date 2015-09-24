@@ -14,10 +14,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src ="/resources/scripts/formRequestHandler.js" ></script>
     <script>
-        function formProcessor(form){
-            var csv = getCSV('addressCollection');
+        function processOutGoingData(form, checkBoxNames){
+            for(var i=0;i<checkBoxNames.length;i++)
+                formProcessor(form,checkBoxNames[i]);
+        }
+        function formProcessor(form,checkBoxName){
+
+            var csv = getCSV(checkBoxName);
             alert(csv);
-            var checkBoxArray = document.getElementsByName('addressCollection');
+            var checkBoxArray = document.getElementsByName(checkBoxName);
             for(var i=0;i<checkBoxArray.length;i++) {
                 var checkBox = checkBoxArray[i];
                 document.getElementById(checkBox.id);
@@ -25,7 +30,7 @@
             }
             var addressNode = document.createElement("input");
             addressNode.setAttribute('type','hidden');
-            addressNode.setAttribute('name','addressCollection');
+            addressNode.setAttribute('name',checkBoxName);
             addressNode.setAttribute('value',csv);
             form.appendChild(addressNode);
         }
@@ -35,7 +40,7 @@
             for(var i=0;i<checkboxArray.length;i++){
                 if(checkboxArray[i].checked){
                     //alert(checkboxArray[i].value);
-                    csv = csv + checkboxArray[i].value + ", ";
+                    csv = csv + checkboxArray[i].value + " , ";
                 }
             }
             return csv;
@@ -71,19 +76,19 @@
         </tr>
         GrantTypes <br>
         <tr>
-            <td><spring:checkbox path="authorizedGrantTypes" value="authorization_code"/>Authorization Code3</td>
+            <td><spring:checkbox path="authorizedGrantTypes" value="authorization_code"/>Authorization Code</td>
         </tr>
         <tr>
             <td><spring:checkbox path="authorizedGrantTypes" value="implicit"/>Implicit</td>
         </tr>        <tr>
-            <td><spring:checkbox path="authorizedGrantTypes" value="password"/>Resource Owner Password Credentials3</td>
+            <td><spring:checkbox path="authorizedGrantTypes" value="password"/>Resource Owner Password Credentials</td>
         </tr>
         <tr>
             <td><spring:checkbox path="authorizedGrantTypes" value="client_credentials"/>Client Credentials</td>
         </tr>
 
     </table>
-    <input id="submit-button" onclick="formProcessor(this)" type="submit">
+    <input id="submit-button" onclick="processOutGoingData(this,['authorizedGrantTypes','addressCollection'])" type="submit">
 </spring:form>
 </body>
 </html>

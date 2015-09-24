@@ -72,11 +72,43 @@ public class CollectionPropertyEditorTest {
         addressCollectionPropertyEditor.setAsText(csv);
         Assert.assertEquals("Comparing both csv\'s", csv, addressCollectionPropertyEditor.getAsText());
     }
+
+    /**
+     * tests if setAsText converts csv property into a Collection to setValue of the PropertyEditor
+     */
     @Test
     public void testGenericCollectionGeneration(){
         genericCollectionPropertyEditor = new CollectionPropertyEditor(GrantType.class);
-        genericCollectionPropertyEditor.setAsText("authorization_code, implicit, password, client_credentials");
-        System.out.println(genericCollectionPropertyEditor.getValue());
+        genericCollectionPropertyEditor.setAsText("authorization_code , implicit , password , client_credentials , ");
+        Collection<GrantType> retrievedCollection = (Collection<GrantType>) genericCollectionPropertyEditor.getValue();
+        int count =0;
+        for(GrantType element:retrievedCollection){
+            for(GrantType secondElement : grantTypeCollection)
+                if(secondElement.equals(element))
+                count++ ;
+        }
+        Assert.assertEquals("The GrantTypeCollection does not contain same values when retrieved from PropertyEditor", 4, count);
+    }
 
+    /**
+     * Tests if setAsText will return equivalent getAsText for generic types
+     */
+    @Test
+    public void getAsTextGenericCollectionPropertyEditorTsst(){
+        genericCollectionPropertyEditor = new CollectionPropertyEditor(GrantType.class);
+        String grantTypeCSV = "authorization_code , implicit , password , client_credentials , ";
+        genericCollectionPropertyEditor.setAsText(grantTypeCSV);
+        String retrievedCollection = genericCollectionPropertyEditor.getAsText();
+        System.out.println(genericCollectionPropertyEditor.getAsText());
+        System.out.println(grantTypeCSV);
+        String[] inputArray = grantTypeCSV.split(" , ");
+        String[] outputArray= genericCollectionPropertyEditor.getAsText().split(" , ");
+        int count =0;
+        for(String element1 : inputArray)
+            for(String element2 : outputArray) {
+                if (element1.equals(element2))
+                    count++;
+            }
+        Assert.assertEquals("The PropertyEditor when setAsText with csv values does not return same values as CSV when getAsText", 4, count);
     }
 }

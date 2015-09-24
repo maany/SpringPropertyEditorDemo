@@ -29,14 +29,25 @@ public class  CollectionPropertyEditor extends PropertyEditorSupport {
     @Override
     public String getAsText() {
         String returnValue = "";
-        try {
-            AddressCollection collection = (AddressCollection)getValue();
-            for(Address element : collection){
-                returnValue+= element.toString() + ", ";
+        if(classType ==Address.class) {
+            try {
+                AddressCollection collection = (AddressCollection) getValue();
+                for (Address element : collection) {
+                    returnValue += element.toString() + " , ";
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                System.out.println("FAILED to getAsText() object of type " + classType.getName());
             }
-        }catch (Exception ex){
-            ex.printStackTrace();
-            System.out.println("FAILED to getAsText() object of type " + classType.getName());
+        } else{
+            try {
+                Collection<? extends Parametrized> collection = (HashSet<? extends Parametrized>) getValue();
+                for (Parametrized element : collection)
+                    returnValue += element.getParameter() + " , ";
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                System.out.println("FAILED to getAsText() object of type " + classType.getName());
+            }
         }
         return returnValue;
     }
@@ -48,7 +59,7 @@ public class  CollectionPropertyEditor extends PropertyEditorSupport {
      */
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
-        String[] values = text.split(", ");
+        String[] values = text.split(" , ");
         if(classType == Address.class) {
             AddressCollection collection = new AddressCollection();
             for (String value : values) {

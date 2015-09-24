@@ -60,8 +60,8 @@ public class ClientController {
     public void setBinders(WebDataBinder binder){
         CollectionPropertyEditor collectionPropertyEditor = new CollectionPropertyEditor(Address.class);
         CollectionPropertyEditor grantTypeCollectionPropertyEditor = new CollectionPropertyEditor(GrantType.class);
-        binder.registerCustomEditor(getNewClient().getAddressCollection().getClass(),collectionPropertyEditor);
         binder.registerCustomEditor(getNewClient().getAuthorizedGrantTypes().getClass(),grantTypeCollectionPropertyEditor);
+        binder.registerCustomEditor(getNewClient().getAddressCollection().getClass(),collectionPropertyEditor);
 
     }
 }

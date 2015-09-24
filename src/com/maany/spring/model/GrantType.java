@@ -27,4 +27,9 @@ public class GrantType implements Parametrized {
     public String toString() {
         return grantType;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return grantType.equals(obj.toString());
+    }
 }

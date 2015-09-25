@@ -13,39 +13,7 @@
     <title>Client Registration</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src ="/resources/scripts/formRequestHandler.js" ></script>
-    <script>
-        function processOutGoingData(form, checkBoxNames){
-            for(var i=0;i<checkBoxNames.length;i++)
-                formProcessor(form,checkBoxNames[i]);
-        }
-        function formProcessor(form,checkBoxName){
 
-            var csv = getCSV(checkBoxName);
-            alert(csv);
-            var checkBoxArray = document.getElementsByName(checkBoxName);
-            for(var i=0;i<checkBoxArray.length;i++) {
-                var checkBox = checkBoxArray[i];
-                document.getElementById(checkBox.id);
-                checkBox.checked = false;
-            }
-            var addressNode = document.createElement("input");
-            addressNode.setAttribute('type','hidden');
-            addressNode.setAttribute('name',checkBoxName);
-            addressNode.setAttribute('value',csv);
-            form.appendChild(addressNode);
-        }
-        function getCSV(checkboxName){
-            var csv = "";
-            var checkboxArray = document.getElementsByName(checkboxName);
-            for(var i=0;i<checkboxArray.length;i++){
-                if(checkboxArray[i].checked){
-                    //alert(checkboxArray[i].value);
-                    csv = csv + checkboxArray[i].value + " , ";
-                }
-            }
-            return csv;
-        }
-    </script>
  </head>
 
 <body>
@@ -88,7 +56,7 @@
         </tr>
 
     </table>
-    <input id="submit-button" onclick="processOutGoingData(this,['authorizedGrantTypes','addressCollection'])" type="submit">
+    <input id="submit-button" onclick="processForm(this,['authorizedGrantTypes','addressCollection'])" type="submit">
 </spring:form>
 </body>
 </html>
